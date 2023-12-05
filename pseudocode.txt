@@ -1,0 +1,14 @@
+first function
+
+	getComputerChoice (randomly return "Rock", "Paper", or "Scissors")
+
+second function (with two parameters)
+	
+	(function that plays a single round of rock paper scissors.
+	 Include *playerSelection* and *computerSelection*)
+
+	(which returns a string that declares the winner of the round 
+	 Ex: "You Lose, Paper beats Rock!")
+
+	(make playerSelection parameter case in-sensitive)
+	(account for TIES by replaying the round)
