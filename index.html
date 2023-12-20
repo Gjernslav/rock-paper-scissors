@@ -7,84 +7,80 @@
 </head>
 <body>
   <script>
-  function getComputerChoice() {
-      const randomNumber = Math.floor(Math.random() * 3);
-      if (randomNumber === 0) {
-        return "Rock";
-      } else if (randomNumber === 1) {
-        return "Paper";
-      } else if (randomNumber === 2) {
-        return "Scissors";
-      }
-      // This will only happen if something goes wrong with the random number generation
-      return "Error: Invalid random number";
-    }
+function getComputerChoice() {
+  const randomNumber = Math.floor(Math.random() * 3);
+  if (randomNumber === 0) {
+    return "Rock";
+  } else if (randomNumber === 1) {
+    return "Paper";
+  } else if (randomNumber === 2) {
+    return "Scissors";
+  }
+  // This will only happen if something goes wrong with the random number generation
+  return "Error: Invalid random number";
+}
 
-    // Example usage:
-    const computerChoice = getComputerChoice();
-    console.log("Computer chose: " + computerChoice);
+function playRound(playerSelection, computerSelection) {
+  playerSelection = playerSelection.toLowerCase();
+  if (!['rock', 'paper', 'scissors'].includes(playerSelection)) {
+    return "Please choose rock, paper, or scissors.";
+  }
 
+  // Defines possible outcomes
+  const outcomes = {
+    'rock': {'rock': 'Tie', 'paper': 'You Lose!', 'scissors': 'You Win!'},
+    'paper': {'rock': 'You Win!', 'paper': 'Tie', 'scissors': 'You Lose!'},
+    'scissors': {'rock': 'You Lose!', 'paper': 'You Win!', 'scissors': 'Tie'}
+  };
 
-  function playRound(playerSelection, computerSelection) {
-    playerSelection = playerSelection.toLowerCase();
-    if (!['rock', 'paper', 'scissors'])includes(playerSelection); {
-      return "Please choose rock, paper, or scissors.";
-    }
+  // Determines the winner of the round
+  const result = outcomes[playerSelection][computerSelection];
 
-    // Defines possible outcomes
-    const outcomes = {
-      'rock': {'rock': 'Tie', 'paper': 'You Lose!', 'scissors': 'You Win!'},
-      'paper': {'rock': 'You Win!', 'paper': 'Tie', 'Scissors': 'You Lose!'},
-      'scissors': {'rock': 'You Lose!', 'paper': 'You Win!', 'scissors': 'Tie'}
-    };
+  // If tie, the round replays
+  if (result === 'Tie') {
+    return "It's a tie! Let's go again.";
+  } else {
+    return result + '! ' + result.split(' ')[1] + ' beats ' + playerSelection;
+  }
+}
 
-    // Determines the winner of the round
-    const result = outcomes[playerSelection][computerSelection];
+// The function that is the Game
+function game() {
+  let playerScore = 0;
+  let computerScore = 0;
 
-    // If tie, the round replays
-    if (result === 'Tie') {
-      return "Its a tie!, Let's go again.";
-    } else {
-      return result + '!' + result.split('')[1] + ' beats ' + playerSelection;
-    }
+  for (let round = 1; round <= 5; round++) {
+    const playerChoice = prompt('Round ' + round + ': Enter your choice (rock, paper, or scissors): ');
+    const computerChoice = ['rock', 'paper', 'scissors'][Math.floor(Math.random() * 3)];
 
-    // The function that is the Game
-    function game() {
-      let playerScore = 0;
-      let computerScore = 0;
+    alert('Computer chose: ' + computerChoice);
 
-      for (let round; round <=5; round++) {
-        const playerChoice = prompt('round ' + round + ':Enter your choice (rock, paper, or scissors): ');
-        const computerChoice = ['rock', 'paper', 'scissors'][Math.floor(Math.random() * 3)];
-      }
+    const result = playRound(playerChoice, computerChoice);
+    alert(result);
 
-      alert('Computer chose:' + computerChoice);
-
-      const result = playRound(playerChoice, computerChoice);
-      alert(result);
-
-      if (result.includes('Win')) {
-        playerScore++;
-      } else if (result.includes('Lose')) {
-        computerScore++;
-      }
-    }
-
-    alert('\nGame Over!');
-    alert('Player Score: ' + playerScore);
-    alert('Computer Score:' + computerScore);
-
-    if (playerScore > computerScore) {
-      alert('Congratulations! You win!');
-    } else if (playerScore < computerScore) {
-      alert('Sorry, You lost this battle!');
-    } else {
-      alert("It's a tie! Stalemate. Go again?");
+    if (result.includes('Win')) {
+      playerScore++;
+    } else if (result.includes('Lose')) {
+      computerScore++;
     }
   }
-//Call Game function to start the game
 
-  
+  alert('\nGame Over!');
+  alert('Player Score: ' + playerScore);
+  alert('Computer Score: ' + computerScore);
+
+  if (playerScore > computerScore) {
+    alert('Congratulations! You win!');
+  } else if (playerScore < computerScore) {
+    alert('Sorry, you lost this battle!');
+  } else {
+    alert("It's a tie! Stalemate. Go again?");
+  }
+}
+
+// Call the game function to start the Rock Paper Scissors game
+game();
+
   </script>
 </body>
 </html>
