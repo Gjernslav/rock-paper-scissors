@@ -7,7 +7,7 @@
 </head>
 <body>
   <script>
- function getComputerChoice() {
+  function getComputerChoice() {
       const randomNumber = Math.floor(Math.random() * 3);
       if (randomNumber === 0) {
         return "Rock";
@@ -23,6 +23,68 @@
     // Example usage:
     const computerChoice = getComputerChoice();
     console.log("Computer chose: " + computerChoice);
+
+
+  function playRound(playerSelection, computerSelection) {
+    playerSelection = playerSelection.toLowerCase();
+    if (!['rock', 'paper', 'scissors'])includes(playerSelection); {
+      return "Please choose rock, paper, or scissors.";
+    }
+
+    // Defines possible outcomes
+    const outcomes = {
+      'rock': {'rock': 'Tie', 'paper': 'You Lose!', 'scissors': 'You Win!'},
+      'paper': {'rock': 'You Win!', 'paper': 'Tie', 'Scissors': 'You Lose!'},
+      'scissors': {'rock': 'You Lose!', 'paper': 'You Win!', 'scissors': 'Tie'}
+    };
+
+    // Determines the winner of the round
+    const result = outcomes[playerSelection][computerSelection];
+
+    // If tie, the round replays
+    if (result === 'Tie') {
+      return "Its a tie!, Let's go again.";
+    } else {
+      return result + '!' + result.split('')[1] + ' beats ' + playerSelection;
+    }
+
+    // The function that is the Game
+    function game() {
+      let playerScore = 0;
+      let computerScore = 0;
+
+      for (let round; round <=5; round++) {
+        const playerChoice = prompt('round ' + round + ':Enter your choice (rock, paper, or scissors): ');
+        const computerChoice = ['rock', 'paper', 'scissors'][Math.floor(Math.random() * 3)];
+      }
+
+      alert('Computer chose:' + computerChoice);
+
+      const result = playRound(playerChoice, computerChoice);
+      alert(result);
+
+      if (result.includes('Win')) {
+        playerScore++;
+      } else if (result.includes('Lose')) {
+        computerScore++;
+      }
+    }
+
+    alert('\nGame Over!');
+    alert('Player Score: ' + playerScore);
+    alert('Computer Score:' + computerScore);
+
+    if (playerScore > computerScore) {
+      alert('Congratulations! You win!');
+    } else if (playerScore < computerScore) {
+      alert('Sorry, You lost this battle!');
+    } else {
+      alert("It's a tie! Stalemate. Go again?");
+    }
+  }
+//Call Game function to start the game
+
+  
   </script>
 </body>
 </html>
